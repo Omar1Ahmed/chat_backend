@@ -19,6 +19,7 @@ exports.protect = (req, res, next) => {
 exports.validateBody = (requiredFields) => {
     return (req, res, next) => {
         // Check if any required field is missing in the request body
+
         const missingFields = requiredFields.filter(field => !req.body[field]);
         
         // If any field is missing, respond with an error
@@ -29,7 +30,7 @@ exports.validateBody = (requiredFields) => {
             });
         }
         
-        console.log(req.body);
+        
         // If all fields are present, proceed to the next middleware or controller
         next();
     };

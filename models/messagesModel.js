@@ -34,3 +34,59 @@ fetchChatId = async (user_one, user_two) => {
                 throw new Error("Error fetching chat ID");
             }
 }
+
+
+
+exports.insertMessage = async (chat_id,sender_id, content) => {
+    try {
+
+
+       await db.execute(
+        'INSERT INTO messages (chat_id, sender_id, content) VALUES (?, ?, ?)',
+        [chat_id, sender_id, content]
+      );
+  
+      return { success: true, message: "Message inserted successfully" };
+
+    } catch (error) {
+      console.error(error);
+      throw new Error("Error inserting message");
+    }
+  };
+
+
+
+exports.otherUserFBToken = async (chat_id,sender_id) => {
+    try {
+
+
+       const [res] =await db.execute(
+        'select user_one,user_two from chats where chat_id = ?',
+        [chat_id]
+      );
+
+       var  reciever_id = '';
+      
+      if(res[0].user_one === sender_id){
+        reciever_id= res[0].user_two;
+        
+      }else{
+        reciever_id= res[0].user_one;
+      }
+
+      const [fb_token] = await db.execute(
+        'select FB_token from users where id = ?',
+        [reciever_id]
+      );
+
+      
+      return fb_token[0].FB_token;
+
+    } catch (error) {
+      console.error(error);
+      throw new Error("Error inserting message");
+    }
+  };
+
+
+  

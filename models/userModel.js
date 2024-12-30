@@ -1,10 +1,10 @@
 const db = require('../config/db');
 
-exports.createUser = async (email, password,first_name,last_name) => {
+exports.createUser = async (email, password,first_name,last_name, fb_token) => {
     
     try{
-          await db.execute('INSERT INTO users (email, password,first_name,last_name) VALUES (?, ?,?,?)', 
-            [email, password,first_name,last_name]);
+          await db.execute('INSERT INTO users (email, password,first_name,last_name,FB_token) VALUES (?, ?,?,?,?)', 
+            [email, password,first_name,last_name, fb_token]);
           
             const [rows] = await db.execute(
                 'SELECT id FROM users WHERE email = ?',
@@ -37,7 +37,7 @@ exports.findByEmail = async (email) => {
     return user[0];
 }; 
 
-exports.findById = async (id) => {
-    const [rows] = await db.execute('SELECT * FROM users WHERE id = ?', [id]);
+exports.updateFBToken = async (fb_token) => {
+    const [rows] = await db.execute('update users set FB_token =?', [fb_token]);
     return rows[0];
 };
