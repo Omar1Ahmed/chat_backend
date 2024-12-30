@@ -37,7 +37,7 @@ exports.findByEmail = async (email) => {
     return user[0];
 }; 
 
-exports.updateFBToken = async (fb_token) => {
-    const [rows] = await db.execute('update users set FB_token =?', [fb_token]);
+exports.updateFBToken = async (fb_token, user_id) => {
+    const [rows] = await db.execute('update users set FB_token =? where id = ?', [fb_token,user_id]);
     return rows[0];
 };

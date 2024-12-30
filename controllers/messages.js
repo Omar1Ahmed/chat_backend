@@ -35,8 +35,8 @@ exports.sendMessage = async (req, res) => {
         
         await Messages.insertMessage(chat_id, req.user.id, content);
   
-        const fb_token = await Messages.otherUserFBToken(chat_id,req.user.id)
-
+        const fb_token = await Messages.otherUserFBToken(chat_id,req.user.id);
+console.log(fb_token);
         await sendNotification(fb_token,'New Message from'+req.user.firs_name,content);
 
       res.status(201).json({

@@ -30,7 +30,7 @@ exports.login = async (req, res) => {
     res.status(201).json({code: 201, message: "Failed logging in", error:"No recorded account for "+email}) 
     }else if (user && await bcrypt.compare(password, user.password)) {
         
-        await User.updateFBToken(fb_token);
+        await User.updateFBToken(fb_token, user.id);
         
         const token = createToken(user.id, user.first_name,fb_token);
        

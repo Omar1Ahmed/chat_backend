@@ -7,4 +7,4 @@ const {protect ,validateBody} = require('../middlewares/globalMiddlewares');
 router.get('/getAllMessages',protect, validateBody(['selected_userId']),getAllmessages);
 router.post('/sendMessage',protect, validateBody(['content','chat_id']), sendMessage);
 
-module.exports = router;
+module.exports = router;    

@@ -22,7 +22,7 @@ exports.validateBody = (requiredFields) => {
 
         const missingFields = requiredFields.filter(field => !req.body[field]);
         
-        // If any field is missing, respond with an error
+        
         if (missingFields.length) {
             return res.status(400).json({
                 message: `Invalid Input values`,

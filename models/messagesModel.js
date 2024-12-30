@@ -6,7 +6,7 @@ exports.fetchAllmessages = async (user_one, user_two) =>{
     
         const [messages] = await db.execute('select * from messages where chat_id = ? order by created_at',[chat_id]);
     
-    console.log(messages);
+        
     return messages;
    
 }
