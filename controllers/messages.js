@@ -50,3 +50,26 @@ console.log(fb_token);
       });
     }
   };
+
+
+exports.getAllusers = async (req, res ) =>{
+  try {
+      
+        
+    const [users] = await Messages.getAllusers(req.user.id);
+
+
+    
+
+  res.status(201).json({
+    Message: 'Users sent successfully',
+    users: users
+  });
+} catch (error) {
+  res.status(500).json({
+    error_code: error.error_code || 500,
+    Message: 'Failed to send message',
+    error: error.message,
+  });
+}
+};

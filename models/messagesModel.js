@@ -90,3 +90,21 @@ exports.otherUserFBToken = async (chat_id,sender_id) => {
 
 
   
+  exports.getAllusers = async (user_id) => {
+    try {
+
+
+       const res =await db.execute(
+        'select * from users where id != ?',
+        [user_id]
+      );
+
+    
+      
+      return res;
+
+    } catch (error) {
+      console.error(error);
+      throw new Error("Error inserting message");
+    }
+  };
